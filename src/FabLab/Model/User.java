@@ -12,18 +12,22 @@ public class User {
     private final StringProperty lastName;
     private final StringProperty rolNumber;
     private final StringProperty userID;
+    private final StringProperty emailAdress;
+    private final StringProperty study;
 
     public User()
     {
-        this(null,null, null, null);
+        this(null,null, null, null, null, null);
     }
 
-    public User(String firstName, String lastName, String rolNumber, String userID)
+    public User(String firstName, String lastName, String rolNumber, String userID, String email, String opleiding)
     {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.rolNumber = new SimpleStringProperty(rolNumber);
         this.userID = new SimpleStringProperty(userID);
+        this.emailAdress = new SimpleStringProperty(email);
+        this.study = new SimpleStringProperty(opleiding);
     }
 
     public String getFirstName()
@@ -64,5 +68,25 @@ public class User {
     public void setUserID(String userID)
     {
         this.userID.set(userID);
+    }
+
+    public String getEmailAdress()
+    {
+        return this.emailAdress.get();
+    }
+
+    public void setEmailAdress(String emailAdress)
+    {
+        this.emailAdress.set(emailAdress);
+    }
+
+    public String getStudy()
+    {
+        return this.study.get();
+    }
+
+    public void setStudy(String study)
+    {
+        this.study.set(study);
     }
 }

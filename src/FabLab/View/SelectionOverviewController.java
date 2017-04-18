@@ -4,6 +4,7 @@ import FabLab.MainApp;
 import FabLab.Model.Machine;
 import FabLab.Model.Material;
 import FabLab.Model.User;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -25,6 +26,10 @@ public class SelectionOverviewController {
     @FXML
     private Label rolNumberLabel;
     @FXML
+    private Label emailadressLabel;
+    @FXML
+    private Label studyLabel;
+    @FXML
     private Label userIDLabel;
     @FXML
     private Label selectedMachineLabel;
@@ -35,7 +40,6 @@ public class SelectionOverviewController {
     private MainApp mainapp;
     private Machine selectedMachine;
     private Material selectedMaterial;
-    public boolean registerWindowOpen = false;
 
     //constructor is called BEFORE the initialize method
     public SelectionOverviewController()
@@ -80,7 +84,7 @@ public class SelectionOverviewController {
     public void getUserInfo(String UID)
     {
         //TODO check UID met database, user bestaat: object maken
-        User user = new User("Jonas", "De Rynck", "s0140499", UID);
+        User user = new User("Jonas", "De Rynck", "s0140499", UID, "derynck.jonas@gmail.com", "EICT");
         boolean registered;
         //registered = true;
         registered = false;
@@ -89,6 +93,8 @@ public class SelectionOverviewController {
             firstNameLabel.setText(user.getFirstName());
             lastNameLabel.setText(user.getLastName());
             rolNumberLabel.setText(user.getRolNumber());
+            emailadressLabel.setText(user.getEmailAdress());
+            studyLabel.setText(user.getStudy());
             userIDLabel.setText(user.getUserID());
             //TODO info van backend halen
         }
@@ -116,11 +122,13 @@ public class SelectionOverviewController {
         }
     }
 
-    public void setFieldsOnRegister(String firstName, String lastName, String rolNumber)
+    public void setFieldsOnRegister(String firstName, String lastName, String rolNumber, String email, String study)
     {
         this.firstNameLabel.setText(firstName);
         this.lastNameLabel.setText(lastName);
         this.rolNumberLabel.setText(rolNumber);
+        this.emailadressLabel.setText(email);
+        this.studyLabel.setText(study);
     }
 
 }

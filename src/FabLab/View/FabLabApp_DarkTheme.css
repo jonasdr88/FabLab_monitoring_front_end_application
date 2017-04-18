@@ -53,12 +53,13 @@
 }
 
 .text-field {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
     -fx-font-size: 12pt;
     -fx-font-family: "helvetica";
     -fx-background-color: #bfbfbf;
     -fx-text-fill: black;
     -fx-border-color: #050505;
-    -fx-border-radius: 10;
 }
 
 /*

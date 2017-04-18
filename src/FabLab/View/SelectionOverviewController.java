@@ -5,6 +5,7 @@ import FabLab.Model.Machine;
 import FabLab.Model.Material;
 import FabLab.Model.User;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
@@ -34,6 +35,7 @@ public class SelectionOverviewController {
     private MainApp mainapp;
     private Machine selectedMachine;
     private Material selectedMaterial;
+    public boolean registerWindowOpen = false;
 
     //constructor is called BEFORE the initialize method
     public SelectionOverviewController()
@@ -97,7 +99,21 @@ public class SelectionOverviewController {
 
     public void registerUser(String UID)
     {
-        mainapp.showRegisterUserDialog(UID);
+        if(!mainapp.registerWindowOpen)
+        {
+            mainapp.showRegisterUserDialog(UID);
+        }
+        else // if registerWindowOpen == true (window is al open)
+        {
+            //Show the error message
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(mainapp.getPrimaryStage());
+            alert.setTitle("ERROR: registreer venster");
+            alert.setHeaderText("Registreervenster al open");
+            alert.setContentText("Sluit het huidige registreervenster om een nieuw te openen.");
+
+            alert.showAndWait();
+        }
     }
 
     public void setFieldsOnRegister(String firstName, String lastName, String rolNumber)

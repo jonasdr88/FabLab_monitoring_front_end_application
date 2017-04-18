@@ -33,6 +33,7 @@ public class MainApp extends Application {
     private static ObservableList<String> machineStringList;
     private static HashMap<String,Machine> machineHashMap;
     private static SelectionOverviewController selectionOverviewController;
+    public boolean registerWindowOpen = false;
 
     @Override
     public void start(Stage primaryStage)
@@ -106,8 +107,9 @@ public class MainApp extends Application {
             controller.setUser(new User("", "", "", UID));
             controller.setSelectionOverviewController(selectionOverviewController);
 
+            registerWindowOpen = true;
             registerUserStage.showAndWait();
-
+            registerWindowOpen = false;
             return controller.isConfirmed();
         }
         catch (IOException e)

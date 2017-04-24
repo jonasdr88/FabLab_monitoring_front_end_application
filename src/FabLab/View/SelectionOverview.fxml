@@ -60,73 +60,102 @@
                <children>
                   <VBox prefHeight="478.0" prefWidth="396.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox prefHeight="111.0" prefWidth="443.0">
+                        <HBox prefHeight="116.0" prefWidth="408.0">
                            <children>
                               <ComboBox fx:id="machineBox" onAction="#machineSelectHandle" prefHeight="60.0" prefWidth="160.0" promptText="Machines" stylesheets="@FabLabApp_DarkTheme.css">
                                  <HBox.margin>
-                                    <Insets bottom="10.0" left="20.0" right="30.0" top="10.0" />
+                                    <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </ComboBox>
                               <ComboBox fx:id="materialBox" onAction="#materialSelectHandle" prefHeight="60.0" prefWidth="160.0" promptText="Materialen">
                                  <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </ComboBox>
+                              <Button fx:id="plusButton" mnemonicParsing="false" onAction="#plusButtonHandle" prefHeight="72.0" prefWidth="85.0" text="+">
+                                 <HBox.margin>
+                                    <Insets right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
                            </children>
                         </HBox>
-                        <HBox prefHeight="129.0" prefWidth="396.0">
+                        <HBox prefHeight="81.0" prefWidth="408.0">
                            <children>
-                              <VBox prefHeight="179.0" prefWidth="396.0">
-                                 <children>
-                                    <HBox prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Label prefHeight="50.0" prefWidth="200.0" text="Geselecteerde machine:">
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="selectedMachineLabel" prefHeight="50.0" prefWidth="255.0" style="-fx-border-color: white;">
-                                             <HBox.margin>
-                                                <Insets right="5.0" />
-                                             </HBox.margin>
-                                             <padding>
-                                                <Insets right="5.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="105.0" prefWidth="396.0">
-                                       <children>
-                                          <Label prefHeight="50.0" prefWidth="200.0" text="Geselecteerd materiaal:">
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="selectedMaterialLabel" prefHeight="50.0" prefWidth="255.0" style="-fx-border-color: white;">
-                                             <HBox.margin>
-                                                <Insets right="5.0" />
-                                             </HBox.margin>
-                                             <padding>
-                                                <Insets right="5.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                       <opaqueInsets>
-                                          <Insets top="20.0" />
-                                       </opaqueInsets>
-                                    </HBox>
-                                 </children>
-                              </VBox>
+                              <Label prefHeight="50.0" prefWidth="85.0" text="machine:">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="selectedMachineLabel" prefHeight="50.0" prefWidth="255.0" style="-fx-border-color: white;">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </HBox>
-                        <Button mnemonicParsing="false" onAction="#handleStart" prefHeight="120.0" prefWidth="214.0" stylesheets="@FabLabApp_DarkTheme.css" text="Start">
-                           <font>
-                              <Font size="42.0" />
-                           </font>
+                        <GridPane prefHeight="186.0" prefWidth="388.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="271.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="117.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="50.0" prefWidth="85.0" text="materialen:" />
+                              <Label fx:id="selectedMaterialLabel1" prefHeight="50.0" prefWidth="255.0" style="-fx-border-color: white;" GridPane.rowIndex="1">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="selectedMaterialLabel2" prefHeight="50.0" prefWidth="255.0" style="-fx-border-color: white;" GridPane.rowIndex="2">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="selectedMaterialLabel3" prefHeight="50.0" prefWidth="255.0" style="-fx-border-color: white;" GridPane.rowIndex="3">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="selectedMaterialLabel4" prefHeight="50.0" prefWidth="255.0" style="-fx-border-color: white;" GridPane.rowIndex="4">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="selectedMaterialLabel5" prefHeight="50.0" prefWidth="255.0" style="-fx-border-color: white;" GridPane.rowIndex="5">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label prefHeight="30.0" prefWidth="144.0" text="hoeveelheid (m³):" GridPane.columnIndex="1" />
+                              <TextField fx:id="materialQuantityTF1" prefHeight="30.0" prefWidth="161.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="materialQuantityTF2" prefHeight="30.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="materialQuantityTF3" prefHeight="30.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="materialQuantityTF4" prefHeight="30.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="materialQuantityTF5" prefHeight="15.0" prefWidth="117.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                           </children>
                            <VBox.margin>
-                              <Insets bottom="50.0" left="100.0" right="50.0" top="50.0" />
+                              <Insets left="20.0" />
                            </VBox.margin>
-                        </Button>
+                        </GridPane>
+                        <Pane prefHeight="95.0" prefWidth="408.0">
+                           <children>
+                              <Button fx:id="startButton" layoutX="123.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="78.0" prefWidth="138.0" stylesheets="@FabLabApp_DarkTheme.css" text="Start">
+                                 <font>
+                                    <Font size="42.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
                      </children>
                   </VBox>
                </children>

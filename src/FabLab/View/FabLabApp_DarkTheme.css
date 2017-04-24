@@ -62,6 +62,16 @@
     -fx-border-color: #050505;
 }
 
+.text-field-materiaal {
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+    -fx-font-size: 12pt;
+    -fx-font-family: "helvetica";
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+}
+
 /*
  * Metro style Push Button
  * Author: Pedro Duque Vieira

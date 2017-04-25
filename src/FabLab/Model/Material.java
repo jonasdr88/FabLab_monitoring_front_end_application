@@ -9,13 +9,20 @@ import javafx.beans.property.StringProperty;
 public class Material {
 
     private final StringProperty name;
+    private StringProperty unit;
 
     public Material(String name) {
         this.name = new SimpleStringProperty(name);
+        this.unit = new SimpleStringProperty("m³");
     }
 
     public String getName()
     {
         return this.name.get();
+    }
+
+    public String getUnit()
+    {
+        return this.unit.get();
     }
 }

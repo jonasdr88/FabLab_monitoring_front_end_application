@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,52 +66,41 @@ public class SelectionOverviewController {
     private MainApp mainapp;
     private Machine selectedMachine;
     private Map<Material, String> selectedMaterials;
-    private Label[] materialLabels;
-    private TextField[] materialQuantityTFS;
+    private List<Label> materialLabels;
+    private List<TextField> materialQuantityTFS;
     private int materialamount;
 
     //constructor is called BEFORE the initialize method
     public SelectionOverviewController()
     {
-        materialLabels = new Label[5];
-        materialQuantityTFS = new TextField[5];
-        materialLabels[0] = selectedMaterialLabel1;
-        materialLabels[1] = selectedMaterialLabel2;
-        materialLabels[2] = selectedMaterialLabel3;
-        materialLabels[3] = selectedMaterialLabel4;
-        materialLabels[4] = selectedMaterialLabel5;
-        materialQuantityTFS[0] = materialQuantityTF1;
-        materialQuantityTFS[1] = materialQuantityTF2;
-        materialQuantityTFS[2] = materialQuantityTF3;
-        materialQuantityTFS[3] = materialQuantityTF4;
-        materialQuantityTFS[4] = materialQuantityTF5;
-
-        materialamount = 0;
-        materialLabels[0].setVisible(false);
-        materialLabels[1].setVisible(false);
-        materialLabels[2].setVisible(false);
-        materialLabels[3].setVisible(false);
-        materialLabels[4].setVisible(false);
-        materialQuantityTFS[0].setVisible(false);
-        materialQuantityTFS[1].setVisible(false);
-        materialQuantityTFS[2].setVisible(false);
-        materialQuantityTFS[3].setVisible(false);
-        materialQuantityTFS[4].setVisible(false);
-
-
-
     }
 
     public void initialize()
     {
-//        materialamount = 0;
-//        for(int i = 0; i<5; i++)
-//        {
-//            materialLabels[i].setVisible(false);
-//            materialLabels[i].setText("");
-//            materialQuantityTFS[i].setVisible(false);
-//            materialQuantityTFS[i].setText("");
-//        }
+        materialLabels = new ArrayList<>();
+        selectedMaterials = new HashMap<>();
+        materialQuantityTFS = new ArrayList<>();
+
+        materialLabels.add(selectedMaterialLabel1);
+        materialLabels.add(selectedMaterialLabel2);
+        materialLabels.add(selectedMaterialLabel3);
+        materialLabels.add(selectedMaterialLabel4);
+        materialLabels.add(selectedMaterialLabel5);
+
+        materialQuantityTFS.add(materialQuantityTF1);
+        materialQuantityTFS.add(materialQuantityTF2);
+        materialQuantityTFS.add(materialQuantityTF3);
+        materialQuantityTFS.add(materialQuantityTF4);
+        materialQuantityTFS.add(materialQuantityTF5);
+
+        materialamount = 0;
+
+        for(int i=0; i<5; i++)
+        {
+            materialLabels.get(i).setVisible(false);
+            materialQuantityTFS.get(i).setVisible(false);
+        }
+
     }
 
     @FXML
@@ -132,14 +123,11 @@ public class SelectionOverviewController {
         materialBox.setItems(selectedMachine.getMaterialStringList());
 
         materialamount = 0;
-//        for(int i = 0; i<5; i++)
-//        {
-//            materialLabels[2].setVisible(false);
-//            materialLabels[2].setText("");
-//            materialQuantityTFS[2].setVisible(false);
-            materialQuantityTFS[2].setText("");
-//        }
-
+        for(int i=0; i<5; i++)
+        {
+            materialLabels.get(i).setVisible(false);
+            materialQuantityTFS.get(i).setVisible(false);
+        }
     }
 
     public void materialSelectHandle()
@@ -148,11 +136,24 @@ public class SelectionOverviewController {
 
     public void plusButtonHandle()
     {
-//        materialLabels[materialamount].setVisible(true);
-//        materialQuantityTFS[materialamount].setVisible(true);
-//        materialLabels[materialamount].setText(materialBox.getValue());
-//        selectedMaterials.put(selectedMachine.getMaterialHashMap().get(materialBox.getValue()), materialQuantityTFS[materialamount].getText());
-//        materialamount++;
+        if(materialamount <= 4)
+        {
+            materialLabels.get(materialamount).setVisible(true);
+            materialQuantityTFS.get(materialamount).setVisible(true);
+            materialLabels.get(materialamount).setText(materialBox.getValue());
+            selectedMaterials.put(selectedMachine.getMaterialHashMap().get(materialBox.getValue()), materialQuantityTFS.get(materialamount).getText());
+            materialamount++;
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(mainapp.getPrimaryStage());
+            alert.setTitle("ERROR: materialen");
+            alert.setHeaderText("Maximaal aantal materialen bereikt.");
+            alert.setContentText("Om de materialen te verwijderen: selecteer een andere machine.");
+            alert.showAndWait();
+        }
+
     }
 
     public void setUserIDLabel(String UID)

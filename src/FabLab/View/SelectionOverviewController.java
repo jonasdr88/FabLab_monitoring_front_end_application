@@ -74,7 +74,7 @@ public class SelectionOverviewController {
     // reference to main application
     private MainApp mainapp;
     private Machine selectedMachine;
-    private Map<Material, String> selectedMaterials;
+    private Map<Material, Double> selectedMaterials;
     private List<Label> materialLabels;
     private List<TextField> materialQuantityTFS;
     private List<Label> unitLabels;
@@ -124,24 +124,25 @@ public class SelectionOverviewController {
     @FXML
     public void handleStart()
     {
-
-
         HashMap<Material, Double> doubleMap = new HashMap<>();
         try {
             for(int j=0; j<materialamount; j++)
             {
                 System.out.println("Error bij materialamount: " + j);
                 if(!selectedMaterials.containsKey(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText())))
-                    selectedMaterials.put(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText()), materialQuantityTFS.get(j).getText());
+                    selectedMaterials.put(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText()),
+                            Double.parseDouble(materialQuantityTFS.get(j).getText().replace(',', '.').replace(" ","")));
                 else
                 {
-                    double amount = Double.parseDouble(selectedMaterials.get(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText())));
-                    amount += Double.parseDouble(materialQuantityTFS.get(materialamount).getText());
-                    selectedMaterials.put(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText()), amount + "");
+                    System.out.println("string being parsed: " + selectedMaterials.get(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText())));
+                    double amount = selectedMaterials.get(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText()));
+                    System.out.println("second string begin parsed: "+ materialQuantityTFS.get(j).getText());
+                    amount += Double.parseDouble(materialQuantityTFS.get(j).getText().replace(',', '.').replace(" ",""));
+                    selectedMaterials.put(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText()), amount);
                 }
             }
-            //selectedMaterials.forEach((s, string) ->  doubleMap.put(s, Double.parseDouble(string.replace(',', '.').replace(" ",""))));
         } catch (NumberFormatException ex) {
+            ex.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(mainapp.getPrimaryStage());
             alert.setTitle("ERROR: ongeldige input");
@@ -151,7 +152,7 @@ public class SelectionOverviewController {
             return;
         }
         //TODO info naar de backend sturen; Log maken
-        if(!Backend.checkIn(currentUser, selectedMachine, doubleMap))
+        if(!Backend.checkIn(currentUser, selectedMachine, selectedMaterials))
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(mainapp.getPrimaryStage());

@@ -39,7 +39,7 @@ public class MainApp extends Application {
     private static IdleScreenController idleScreenController;
     public boolean registerWindowOpen = false;
     private static MainApp mainapp;
-    private boolean isIdle = true;
+    private static boolean isIdle = true;
 
     public MainApp()
     {
@@ -210,11 +210,14 @@ public class MainApp extends Application {
 
     public static void heartBeat()
     {
-        checkData();
+        if(isIdle)
+            checkData();
     }
 
     public static void checkData()
     {
+        machineHashMap.clear();
+        machineStringList.clear();
         for(Machine machine: Backend.getMachines()) {
             machineHashMap.put(machine.getName(), machine);
             machineStringList.add(machine.getName());

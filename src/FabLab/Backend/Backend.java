@@ -99,7 +99,7 @@ public class Backend
         return false;
     }
 
-    public static boolean checkIn(User user, Machine machine, HashMap<Material, Double> materials) {
+    public static boolean checkIn(User user, Machine machine, Map<Material, Double> materials) {
         JSONObject messageObject = new JSONObject();
         messageObject.put("user_id", user.getId());
         messageObject.put("machine_id", machine.getId());

@@ -107,7 +107,6 @@ public class RegisterUserController {
             String study = studyComboBox.getValue().equalsIgnoreCase("Andere") ? studyTextField.getText() : studyComboBox.getValue();
             User newUser = Backend.createUser(user.getNFCId(), firstNameTextField.getText(), lastNameTextField.getText(), study, rolNumberTextField.getText(), emailAdressTextField.getText());
             if(newUser == null) {
-                //TODO: iets misgegaan bij creatie, check console
                 return;
             } else
                 selectionOverviewController.setCurrentUser(newUser);
@@ -122,7 +121,7 @@ public class RegisterUserController {
                 user.setStudy(studyTextField.getText());
             // userID is set in the MainApp when scanned
             selectionOverviewController.setFieldsOnRegister(user.getFirstName(), user.getLastName(), user.getRolNumber(),
-                    user.getEmailAdress(), user.getStudy());
+                    user.getEmailAdress(), user.getStudy(), newUser.getId());
             confirmed = true;
             registerUserStage.close();
         }

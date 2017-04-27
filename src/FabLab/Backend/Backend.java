@@ -201,6 +201,7 @@ public class Backend
             CloseableHttpResponse response2 = httpclient.execute(httpPost);
             String json = IOUtils.toString(response2.getEntity().getContent(), "UTF-8");
             JSONParser parser = new JSONParser();
+            System.out.println("JSON: " + json);
             JSONObject jsonObject = (JSONObject) parser.parse(json);
             if(jsonObject.get("result") != null && ((String) jsonObject.get("result")).equals("success")) {
                 JSONObject userJson = (JSONObject) jsonObject.get("user");

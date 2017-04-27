@@ -1,5 +1,6 @@
 package FabLab.View;
 
+import FabLab.Backend.Backend;
 import FabLab.Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,8 +101,17 @@ public class RegisterUserController {
     @FXML
     private void handleRegister()
     {
+
         if(isInputValid())
         {
+            String study = studyComboBox.getValue().equalsIgnoreCase("Andere") ? studyTextField.getText() : studyComboBox.getValue();
+            User newUser = Backend.createUser(user.getNFCId(), firstNameTextField.getText(), lastNameTextField.getText(), study, rolNumberTextField.getText(), emailAdressTextField.getText());
+            if(newUser == null) {
+                //TODO: iets misgegaan bij creatie, check console
+                return;
+            } else
+                selectionOverviewController.setCurrentUser(newUser);
+
             user.setFirstName(firstNameTextField.getText());
             user.setLastName(lastNameTextField.getText());
             user.setRolNumber(rolNumberTextField.getText());
@@ -115,8 +125,6 @@ public class RegisterUserController {
                     user.getEmailAdress(), user.getStudy());
             confirmed = true;
             registerUserStage.close();
-            isStudyDifferent = false;
-            //TODO de gemaakte user doorsturen naar backend userdatabase
         }
     }
 

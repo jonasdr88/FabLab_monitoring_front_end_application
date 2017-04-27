@@ -8,26 +8,28 @@ import javafx.beans.property.*;
  */
 public class User {
 
+    private int id;
     private final StringProperty firstName;
     private final StringProperty lastName;
     private final StringProperty rolNumber;
-    private final StringProperty userID;
     private final StringProperty emailAdress;
     private final StringProperty study;
+    private final StringProperty nfc_id;
 
     public User()
     {
-        this(null,null, null, null, null, null);
+        this(-1,null, null, null, null, null, null);
     }
 
-    public User(String firstName, String lastName, String rolNumber, String userID, String email, String opleiding)
+    public User(int id, String firstName, String lastName, String rolNumber, String email, String opleiding, String nfc_id)
     {
+        this.id = id;
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.rolNumber = new SimpleStringProperty(rolNumber);
-        this.userID = new SimpleStringProperty(userID);
         this.emailAdress = new SimpleStringProperty(email);
         this.study = new SimpleStringProperty(opleiding);
+        this.nfc_id = new SimpleStringProperty(nfc_id);
     }
 
     public String getFirstName()
@@ -60,19 +62,18 @@ public class User {
         this.rolNumber.set(rolNumber);
     }
 
-    public String getUserID()
-    {
-        return userID.get();
-    }
-
-    public void setUserID(String userID)
-    {
-        this.userID.set(userID);
+    public int getId() {
+        return this.id;
     }
 
     public String getEmailAdress()
     {
         return this.emailAdress.get();
+    }
+
+    public String getNFCId()
+    {
+        return this.nfc_id.get();
     }
 
     public void setEmailAdress(String emailAdress)
@@ -89,4 +90,9 @@ public class User {
     {
         this.study.set(study);
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

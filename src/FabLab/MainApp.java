@@ -1,7 +1,7 @@
 package FabLab;
 
+import FabLab.Backend.Backend;
 import FabLab.Model.Machine;
-import FabLab.Model.Material;
 import FabLab.Model.User;
 import FabLab.Reader.JavaReader;
 import FabLab.View.IdleScreenController;
@@ -113,7 +113,7 @@ public class MainApp extends Application {
 
             RegisterUserController controller = loader.getController();
             controller.setRegisterUserStage(registerUserStage);
-            controller.setUser(new User("", "", "", UID, "", ""));
+            controller.setUser(new User(-1, "", "", "", "", "", UID));
             controller.setSelectionOverviewController(selectionOverviewController);
 
             registerWindowOpen = true;
@@ -207,17 +207,10 @@ public class MainApp extends Application {
 
     public static void checkData()
     {
-        //TODO Communicatie met server om de machines en materialen op te vragen
-        Machine machine1 = new Machine("Machine1", new Material("Material1"), new Material("material2"),
-                new Material("Material3"));
-        Machine machine2 = new Machine("Machine2", new Material("Material4"), new Material("material5"),
-                new Material("Material6"));
-        Machine machine3 = new Machine("Machine3", new Material("Material7"), new Material("material8"),
-                new Material("Material9"));
-        machineHashMap.put(machine1.getName(), machine1);
-        machineHashMap.put(machine2.getName(), machine2);
-        machineHashMap.put(machine3.getName(), machine3);
-        machineStringList.addAll(machine1.getName(), machine2.getName(), machine3.getName());
+        for(Machine machine: Backend.getMachines()) {
+            machineHashMap.put(machine.getName(), machine);
+            machineStringList.add(machine.getName());
+        }
     }
 
 }

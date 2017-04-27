@@ -7,32 +7,33 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 /**
  * Created by jonas on 11/04/2017.
  */
 public class Machine {
 
+
     private StringProperty name;
     private ArrayList<Material> materialList;
     private ObservableList<String> materialStringList = FXCollections.observableArrayList();
     private HashMap<String, Material> materialHashMap;
-    private int ID;
+    private int id;
     boolean inUse;
     private String user;
 
-    public Machine(String name,Material mat1, Material mat2, Material mat3)
+    public Machine(int id, String name,ArrayList<Material> materials)
     {
+        this.id = id;
         materialList = new ArrayList<>();
         materialHashMap = new HashMap<>();
         this.name = new SimpleStringProperty(name);
-        materialList.add(mat1);
-        materialList.add(mat2);
-        materialList.add(mat3);
-        materialStringList.addAll(mat1.getName(), mat2.getName(), mat3.getName());
-        materialHashMap.put(mat1.getName(), mat1);
-        materialHashMap.put(mat2.getName(), mat2);
-        materialHashMap.put(mat3.getName(), mat3);
+        for(Material material: materials) {
+            materialList.add(material);
+            materialHashMap.put(material.getName(), material);
+        }
+        materialStringList.addAll(materials.stream().map(m -> m.getName()).collect(Collectors.toList()));
     }
 
     public String getName()
@@ -53,6 +54,10 @@ public class Machine {
     public HashMap<String, Material> getMaterialHashMap()
     {
         return this.materialHashMap;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
 }

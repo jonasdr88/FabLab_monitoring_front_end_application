@@ -1,14 +1,13 @@
 package FabLab.View;
 
+import FabLab.Backend.Backend;
 import FabLab.MainApp;
 import FabLab.Model.Machine;
 import FabLab.Model.Material;
 import FabLab.Model.User;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,6 +79,7 @@ public class SelectionOverviewController {
     private List<TextField> materialQuantityTFS;
     private List<Label> unitLabels;
     private int materialamount;
+    private User currentUser;
 
     //constructor is called BEFORE the initialize method
     public SelectionOverviewController()
@@ -185,21 +185,17 @@ public class SelectionOverviewController {
     public void getUserInfo(String UID)
     {
         //TODO check UID met database, user bestaat: object maken
-        User user = new User("Jonas", "De Rynck", "s0140499", UID, "derynck.jonas@gmail.com", "EICT");
-        boolean registered;
-        //registered = true;
-        registered = false;
-        if(registered)
+        User user = Backend.getUser(UID);
+        if(user != null)
         {
             firstNameLabel.setText(user.getFirstName());
             lastNameLabel.setText(user.getLastName());
             rolNumberLabel.setText(user.getRolNumber());
             emailadressLabel.setText(user.getEmailAdress());
             studyLabel.setText(user.getStudy());
-            userIDLabel.setText(user.getUserID());
-            //TODO info van backend halen
+            userIDLabel.setText(user.getId()+"");
+            setCurrentUser(user);
         }
-        //TODO user bestaat niet: registreren
         else
             registerUser(UID);
     }
@@ -230,6 +226,10 @@ public class SelectionOverviewController {
         this.rolNumberLabel.setText(rolNumber);
         this.emailadressLabel.setText(email);
         this.studyLabel.setText(study);
+    }
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
     }
 
 }

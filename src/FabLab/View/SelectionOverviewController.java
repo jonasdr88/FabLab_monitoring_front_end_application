@@ -50,6 +50,16 @@ public class SelectionOverviewController {
     @FXML
     private Label selectedMaterialLabel5;
     @FXML
+    private Label unitLabel1;
+    @FXML
+    private Label unitLabel2;
+    @FXML
+    private Label unitLabel3;
+    @FXML
+    private Label unitLabel4;
+    @FXML
+    private Label unitLabel5;
+    @FXML
     private TextField materialQuantityTF1;
     @FXML
     private TextField materialQuantityTF2;
@@ -68,6 +78,7 @@ public class SelectionOverviewController {
     private Map<Material, String> selectedMaterials;
     private List<Label> materialLabels;
     private List<TextField> materialQuantityTFS;
+    private List<Label> unitLabels;
     private int materialamount;
 
     //constructor is called BEFORE the initialize method
@@ -80,6 +91,7 @@ public class SelectionOverviewController {
         materialLabels = new ArrayList<>();
         selectedMaterials = new HashMap<>();
         materialQuantityTFS = new ArrayList<>();
+        unitLabels = new ArrayList<>();
 
         materialLabels.add(selectedMaterialLabel1);
         materialLabels.add(selectedMaterialLabel2);
@@ -93,14 +105,20 @@ public class SelectionOverviewController {
         materialQuantityTFS.add(materialQuantityTF4);
         materialQuantityTFS.add(materialQuantityTF5);
 
+        unitLabels.add(unitLabel1);
+        unitLabels.add(unitLabel2);
+        unitLabels.add(unitLabel3);
+        unitLabels.add(unitLabel4);
+        unitLabels.add(unitLabel5);
+
         materialamount = 0;
 
         for(int i=0; i<5; i++)
         {
             materialLabels.get(i).setVisible(false);
             materialQuantityTFS.get(i).setVisible(false);
+            unitLabels.get(i).setVisible(false);
         }
-
     }
 
     @FXML
@@ -127,6 +145,7 @@ public class SelectionOverviewController {
         {
             materialLabels.get(i).setVisible(false);
             materialQuantityTFS.get(i).setVisible(false);
+            unitLabels.get(i).setVisible(false);
         }
     }
 
@@ -140,7 +159,9 @@ public class SelectionOverviewController {
         {
             materialLabels.get(materialamount).setVisible(true);
             materialQuantityTFS.get(materialamount).setVisible(true);
+            unitLabels.get(materialamount).setVisible(true);
             materialLabels.get(materialamount).setText(materialBox.getValue());
+            unitLabels.get(materialamount).setText(selectedMachine.getMaterialHashMap().get(materialBox.getValue()).getUnit());
             selectedMaterials.put(selectedMachine.getMaterialHashMap().get(materialBox.getValue()), materialQuantityTFS.get(materialamount).getText());
             materialamount++;
         }

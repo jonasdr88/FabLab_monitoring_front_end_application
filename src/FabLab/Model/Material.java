@@ -9,7 +9,7 @@ import javafx.beans.property.StringProperty;
 public class Material {
 
     private final StringProperty name;
-    private StringProperty unit;
+    private final StringProperty unit;
 
     public Material(String name) {
         this.name = new SimpleStringProperty(name);

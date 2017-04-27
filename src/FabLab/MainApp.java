@@ -4,20 +4,23 @@ import FabLab.Model.Machine;
 import FabLab.Model.Material;
 import FabLab.Model.User;
 import FabLab.Reader.JavaReader;
+import FabLab.View.IdleScreenController;
 import FabLab.View.RegisterUserController;
 import FabLab.View.SelectionOverviewController;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sun.plugin.javascript.navig.Anchor;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,7 +36,14 @@ public class MainApp extends Application {
     private static ObservableList<String> machineStringList;
     private static HashMap<String,Machine> machineHashMap;
     private static SelectionOverviewController selectionOverviewController;
+    private static IdleScreenController idleScreenController;
     public boolean registerWindowOpen = false;
+    private static MainApp mainapp;
+
+    public MainApp()
+    {
+        mainapp = this;
+    }
 
     @Override
     public void start(Stage primaryStage)
@@ -42,7 +52,7 @@ public class MainApp extends Application {
         this.primaryStage.setTitle("FabLab App");
 
         initRootLayout();
-        showSelectionOverview();
+        showIdleScreen();
     }
 
     /* initialize the root layout */
@@ -85,7 +95,6 @@ public class MainApp extends Application {
     }
 
     /* shows the dialog when the person needs to be registered */
-
     public boolean showRegisterUserDialog(String UID)
     {
         try
@@ -119,6 +128,22 @@ public class MainApp extends Application {
         }
     }
 
+    public void showIdleScreen()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("View/IdleScreen.fxml"));
+            AnchorPane IdleScreen = (AnchorPane) loader.load();
+            rootLayout.setCenter(IdleScreen);
+            idleScreenController = loader.getController();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     /* Return the Main Stage (Primarystage) */
     public Stage getPrimaryStage()
     {
@@ -140,6 +165,11 @@ public class MainApp extends Application {
         machineHashMap = new HashMap<>();
         machineStringList = FXCollections.observableArrayList();
         checkData();
+        Timeline timeline = new Timeline(new KeyFrame(
+                new Duration(60000),
+                ae -> heartBeat()));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
         RFIDReader RFIDreader = new JavaReader();
         if(RFIDreader.detectReader())
         {
@@ -151,12 +181,11 @@ public class MainApp extends Application {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                //System.out.println("UID: " + UID);
+                                mainapp.showSelectionOverview();
                                 selectionOverviewController.setUserIDLabel(UID);
                                 selectionOverviewController.getUserInfo(UID);
                                 //TODO communicatie met backend en naam displayen
                             }
-
                         });
                     }
                 }
@@ -168,7 +197,12 @@ public class MainApp extends Application {
         {
             System.out.println("SOMETHING WENT WRONG!!!!");
         }
+    }
 
+    public static void heartBeat()
+    {
+        //TODO send a heartbeat to backend
+        System.out.println("heartbeat in the mainapp to backend");
     }
 
     public static void checkData()

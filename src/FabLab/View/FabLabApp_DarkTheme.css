@@ -1,13 +1,15 @@
 .background {
-    -fx-background-color: #222222;
+    /*-fx-background-color: #222222;*/
+    -fx-background-color: #dbd7d7;
 }
 
 
 .combo-box .cell{
-    -fx-border-color: #050505;
+    /*-fx-border-color: #050505;*/
+    -fx-border-color: black;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: linear-gradient(#550000, #801515);
+    -fx-background-color: #a82f2f;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: white;;
@@ -17,27 +19,50 @@
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "helvetica";
-    -fx-text-fill: white;
+    -fx-text-fill:black;
     -fx-opacity: 1;
+}
+
+.label-right {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+    -fx-border-color: #1e96c0;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill:black;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill:black;
     -fx-opacity: 1;
 }
 
+.label-idleScreen {
+    -fx-font-size: 48pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+}
+
+.label-idleScreenText {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: black;
+}
+
 .split-pane:horizontal > .split-pane-divider {
-    -fx-border-color: transparent #7a7a7a transparent #7a7a7a;
-    -fx-background-color: transparent, derive(#660000,20%);
+    /*-fx-border-color: transparent #7a7a7a transparent #7a7a7a;*/
+    -fx-border-color: #1e96c0;
+    /*-fx-background-color: transparent, derive(#660000,20%);*/
+    -fx-background-color: #dbd7d7;
 }
 
 .split-pane {
@@ -45,7 +70,8 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d,50%);
+    /*-fx-background-color: derive(#1d1d1d,50%);*/
+    -fx-background-color: derive(#dbd7d7,50%);
 }
 
 .menu .left-container {
@@ -57,9 +83,11 @@
     -fx-background-radius: 10 10 10 10;
     -fx-font-size: 12pt;
     -fx-font-family: "helvetica";
-    -fx-background-color: #bfbfbf;
+    /*-fx-background-color: #bfbfbf;*/
+    -fx-background-color: #86b4c4;
     -fx-text-fill: black;
-    -fx-border-color: #050505;
+    /*-fx-border-color: #050505;*/
+    -fx-border-color: #1e96c0;
 }
 
 .text-field-materiaal {
@@ -67,9 +95,10 @@
     -fx-background-radius: 0 0 0 0;
     -fx-font-size: 12pt;
     -fx-font-family: "helvetica";
-    -fx-background-color: #1d1d1d;
-    -fx-text-fill: white;
-    -fx-border-color: white;
+    /*-fx-background-color: #bfbfbf;*/
+    -fx-background-color: #86b4c4;
+    -fx-text-fill: black;
+    -fx-border-color:#1e96c0;
 }
 
 /*
@@ -78,21 +107,23 @@
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
 .button {
-    -fx-border-color: #050505;
+    /*-fx-border-color: #050505;*/
+    -fx-border-color: black;
     -fx-border-width: 2;
     -fx-border-radius: 4;
     /*-fx-background-color: linear-gradient(#550000, #801515);*/
-    -fx-background-color: linear-gradient(#f77400, #FF9415, #FFBA68);
+    -fx-background-color: #a82f2f;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 24pt;
     -fx-text-fill: white;
 }
 .register {
-    -fx-border-color: #050505;
+    /*-fx-border-color: #050505;*/
+    -fx-border-color: black;
     -fx-border-width: 2;
     -fx-border-radius: 4;
     /*-fx-background-radius: 4;*/
-    -fx-background-color: #660000;
+    -fx-background-color: #a82f2f;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 12pt;
     -fx-text-fill: white;
@@ -100,17 +131,20 @@
 
 .button:hover {
     -fx-background-color: #3a3a3a;
-    -fx-border-color: #050505;
+    /*-fx-border-color: #050505;*/
+    -fx-border-color: black;
 }
 
 .button:pressed, .button:default:hover:pressed {
     -fx-background-color: #ababab;
     -fx-text-fill: #1d1d1d;
-    -fx-border-color: #050505;
+    /*-fx-border-color: #050505;*/
+    -fx-border-color: black;
 }
 
 .button:focused {
-    -fx-border-color: #050505;
+    /*-fx-border-color: #050505;*/
+    -fx-border-color: black;
     -fx-border-width: 2;
     -fx-border-radius: 4;
     -fx-background-radius: 4;

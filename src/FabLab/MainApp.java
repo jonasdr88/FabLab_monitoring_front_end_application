@@ -39,6 +39,7 @@ public class MainApp extends Application {
     private static IdleScreenController idleScreenController;
     public boolean registerWindowOpen = false;
     private static MainApp mainapp;
+    private static boolean isIdle = true;
 
     public MainApp()
     {
@@ -78,6 +79,7 @@ public class MainApp extends Application {
     /* Show the Main screen for selection of machines and materials */
     public void showSelectionOverview()
     {
+        isIdle = false;
         try
         {
             // Load the selectionOverview from FXML
@@ -97,6 +99,7 @@ public class MainApp extends Application {
     /* shows the dialog when the person needs to be registered */
     public boolean showRegisterUserDialog(String UID)
     {
+        isIdle = false;
         try
         {
             FXMLLoader loader = new FXMLLoader();
@@ -130,6 +133,7 @@ public class MainApp extends Application {
 
     public void showIdleScreen()
     {
+        isIdle = true;
         try
         {
             FXMLLoader loader = new FXMLLoader();
@@ -142,6 +146,11 @@ public class MainApp extends Application {
         {
             e.printStackTrace();
         }
+    }
+
+    public boolean getIdleState()
+    {
+        return isIdle;
     }
 
     /* Return the Main Stage (Primarystage) */
@@ -201,12 +210,14 @@ public class MainApp extends Application {
 
     public static void heartBeat()
     {
-        //TODO send a heartbeat to backend
-        System.out.println("heartbeat in the mainapp to backend");
+        if(isIdle)
+            checkData();
     }
 
     public static void checkData()
     {
+        machineHashMap.clear();
+        machineStringList.clear();
         for(Machine machine: Backend.getMachines()) {
             machineHashMap.put(machine.getName(), machine);
             machineStringList.add(machine.getName());

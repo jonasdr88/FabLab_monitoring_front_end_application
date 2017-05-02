@@ -74,7 +74,7 @@ public class SelectionOverviewController {
     // reference to main application
     private MainApp mainapp;
     private Machine selectedMachine;
-    private Map<Material, String> selectedMaterials;
+    private Map<Material, Double> selectedMaterials;
     private List<Label> materialLabels;
     private List<TextField> materialQuantityTFS;
     private List<Label> unitLabels;
@@ -124,7 +124,52 @@ public class SelectionOverviewController {
     @FXML
     public void handleStart()
     {
+        HashMap<Material, Double> doubleMap = new HashMap<>();
+        try {
+            for(int j=0; j<materialamount; j++)
+            {
+                System.out.println("Error bij materialamount: " + j);
+                if(!selectedMaterials.containsKey(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText())))
+                    selectedMaterials.put(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText()),
+                            Double.parseDouble(materialQuantityTFS.get(j).getText().replace(',', '.').replace(" ","")));
+                else
+                {
+                    System.out.println("string being parsed: " + selectedMaterials.get(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText())));
+                    double amount = selectedMaterials.get(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText()));
+                    System.out.println("second string begin parsed: "+ materialQuantityTFS.get(j).getText());
+                    amount += Double.parseDouble(materialQuantityTFS.get(j).getText().replace(',', '.').replace(" ",""));
+                    selectedMaterials.put(selectedMachine.getMaterialHashMap().get(materialLabels.get(j).getText()), amount);
+                }
+            }
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(mainapp.getPrimaryStage());
+            alert.setTitle("ERROR: ongeldige input");
+            alert.setHeaderText("corrigeer de hoeveelheidsvelden");
+            alert.setContentText("Hoeveelheidsvelden mogen enkel nummers en komma's bevatten.");
+            alert.showAndWait();
+            return;
+        }
         //TODO info naar de backend sturen; Log maken
+        if(!Backend.checkIn(currentUser, selectedMachine, selectedMaterials))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(mainapp.getPrimaryStage());
+            alert.setTitle("ERROR: PROBLEEM");
+            alert.setHeaderText("Error 1337");
+            alert.setContentText("Er is iets misgelopen!.");
+            alert.showAndWait();
+        }
+        else
+        {
+            materialamount = 0;
+            selectedMaterials.clear();
+            currentUser = null;
+            selectedMachine = null;
+        }
+
+        mainapp.showIdleScreen();
     }
 
     //Called by the MainApp to give a reference to itself
@@ -162,7 +207,7 @@ public class SelectionOverviewController {
             unitLabels.get(materialamount).setVisible(true);
             materialLabels.get(materialamount).setText(materialBox.getValue());
             unitLabels.get(materialamount).setText(selectedMachine.getMaterialHashMap().get(materialBox.getValue()).getUnit());
-            selectedMaterials.put(selectedMachine.getMaterialHashMap().get(materialBox.getValue()), materialQuantityTFS.get(materialamount).getText());
+            //selectedMaterials.put(selectedMachine.getMaterialHashMap().get(materialBox.getValue()), "");
             materialamount++;
         }
         else
@@ -219,13 +264,14 @@ public class SelectionOverviewController {
         }
     }
 
-    public void setFieldsOnRegister(String firstName, String lastName, String rolNumber, String email, String study)
+    public void setFieldsOnRegister(String firstName, String lastName, String rolNumber, String email, String study, int userID)
     {
         this.firstNameLabel.setText(firstName);
         this.lastNameLabel.setText(lastName);
         this.rolNumberLabel.setText(rolNumber);
         this.emailadressLabel.setText(email);
         this.studyLabel.setText(study);
+        this.userIDLabel.setText(userID + "");
     }
 
     public void setCurrentUser(User user) {

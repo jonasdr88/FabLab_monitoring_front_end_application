@@ -105,7 +105,7 @@ public class Backend
         return false;
     }
 
-    public static boolean checkIn(User user, Machine machine, HashMap<Material, Double> materials) {
+    public static boolean checkIn(User user, Machine machine, Map<Material, Double> materials) {
         JSONObject messageObject = new JSONObject();
         messageObject.put("user_id", user.getId());
         messageObject.put("machine_id", machine.getId());
@@ -207,6 +207,7 @@ public class Backend
             CloseableHttpResponse response2 = httpclient.execute(httpPost);
             String json = IOUtils.toString(response2.getEntity().getContent(), "UTF-8");
             JSONParser parser = new JSONParser();
+            System.out.println("JSON: " + json);
             JSONObject jsonObject = (JSONObject) parser.parse(json);
             if(jsonObject.get("result") != null && ((String) jsonObject.get("result")).equals("success")) {
                 JSONObject userJson = (JSONObject) jsonObject.get("user");

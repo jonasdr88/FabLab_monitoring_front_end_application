@@ -34,13 +34,15 @@ public class Backend
     public static void main(String[] args) {
 
         //getMachines();
+        for(int i = 0; i < 200;i++){
         User user = getUser("EE254893");
         ArrayList<Machine> machines = getMachines();
-        Machine machine = machines.get(0);
+        Machine machine = machines.get(3);
         HashMap<Material, Double> materials = new HashMap<>();
         machine.getMaterialList().forEach(m -> materials.put(m, 25.5));
         checkIn(user, machine, materials);
         System.out.println("Checkout: "+checkOut(machine));
+        }
     }
 
 
@@ -64,7 +66,11 @@ public class Backend
                     JSONObject jsonMaterial = (JSONObject) materialObj;
                     materials.add(new Material(((Long) jsonMaterial.get("id")).intValue(), (String) jsonMaterial.get("name")));
                 }
-                machines.add(new Machine(((Long)jsonMachine.get("id")).intValue(), (String)jsonMachine.get("name"), materials));
+                Machine machine = new Machine(((Long)jsonMachine.get("id")).intValue(), (String)jsonMachine.get("name"), materials);
+                if((boolean)jsonMachine.get("in_use")) {
+                    machine.setInUseBy((String) jsonMachine.get("in_use_by"));
+                }
+                machines.add(machine);
             }
             httpclient.close();
             return machines;

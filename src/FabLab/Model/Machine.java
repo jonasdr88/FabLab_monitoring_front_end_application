@@ -20,7 +20,7 @@ public class Machine {
     private ObservableList<String> materialStringList = FXCollections.observableArrayList();
     private HashMap<String, Material> materialHashMap;
     private int id;
-    boolean inUse;
+    boolean inUse = false;
     private String user;
 
     public Machine(int id, String name,ArrayList<Material> materials)
@@ -58,6 +58,20 @@ public class Machine {
 
     public int getId() {
         return this.id;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
+        if(!inUse)
+        this.user = "";
+    }
+
+    public void setInUseBy(String name) {
+        this.user = name;
+    }
+
+    public String getInUseBy() {
+        return this.user;
     }
 
 }

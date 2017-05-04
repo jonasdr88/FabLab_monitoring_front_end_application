@@ -66,7 +66,7 @@ public class Backend
                 ArrayList<Material> materials = new ArrayList<>();
                 for(Object materialObj: (JSONArray)jsonMachine.get("materials")) {
                     JSONObject jsonMaterial = (JSONObject) materialObj;
-                    materials.add(new Material(((Long) jsonMaterial.get("id")).intValue(), (String) jsonMaterial.get("name")));
+                    materials.add(new Material(((Long) jsonMaterial.get("id")).intValue(), (String) jsonMaterial.get("name"), (String) jsonMaterial.get("unit")));
                 }
                 Machine machine = new Machine(((Long)jsonMachine.get("id")).intValue(), (String)jsonMachine.get("name"), materials);
                 if((boolean)jsonMachine.get("in_use")) {
@@ -248,7 +248,7 @@ public class Backend
             ArrayList<Material> materials = new ArrayList<>();
             for(Object materialObj: (JSONArray)jsonMachine.get("materials")) {
                 JSONObject jsonMaterial = (JSONObject) materialObj;
-                materials.add(new Material(((Long) jsonMaterial.get("id")).intValue(), (String) jsonMaterial.get("name")));
+                materials.add(new Material(((Long) jsonMaterial.get("id")).intValue(), (String) jsonMaterial.get("name"), (String) jsonMaterial.get("unit")));
             }
             Machine machine = new Machine(((Long)jsonMachine.get("id")).intValue(), (String)jsonMachine.get("name"), materials);
             if((boolean)jsonMachine.get("in_use")) {

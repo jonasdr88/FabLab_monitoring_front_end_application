@@ -12,10 +12,10 @@ public class Material {
     private final StringProperty name;
     private final StringProperty unit;
 
-    public Material(int id, String name) {
+    public Material(int id, String name, String unit) {
         this.id = id;
         this.name = new SimpleStringProperty(name);
-        this.unit = new SimpleStringProperty("m³");
+        this.unit = new SimpleStringProperty(unit);
     }
 
     public String getName()

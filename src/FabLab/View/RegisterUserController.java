@@ -52,7 +52,7 @@ public class RegisterUserController {
         andereOpleidingLabel.setVisible(false);
         studyTextField.setVisible(false);
         studyStringList = FXCollections.observableArrayList();
-        studyStringList.addAll("Elektronica-ICT", "Elektromechanica", "Bouwkunde", "Chemie", "Andere");
+        studyStringList.addAll("FTI-Elektronica-ICT", "FTI-Elektromechanica", "FTI-Bouwkunde", "FTI-Chemie", "Andere");
         studyComboBox.setItems(studyStringList);
     }
 

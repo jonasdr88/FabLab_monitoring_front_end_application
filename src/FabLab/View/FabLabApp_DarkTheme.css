@@ -9,7 +9,7 @@
     -fx-border-color: black;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #a82f2f;
+    -fx-background-color: #004168;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: white;;
@@ -28,7 +28,7 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: black;
     -fx-opacity: 1;
-    -fx-border-color: #1e96c0;
+    -fx-border-color: #004168;
 }
 
 .label-bright {
@@ -60,7 +60,7 @@
 
 .split-pane:horizontal > .split-pane-divider {
     /*-fx-border-color: transparent #7a7a7a transparent #7a7a7a;*/
-    -fx-border-color: #1e96c0;
+    -fx-border-color: #dbd7d7;
     /*-fx-background-color: transparent, derive(#660000,20%);*/
     -fx-background-color: #dbd7d7;
 }
@@ -98,7 +98,7 @@
     /*-fx-background-color: #bfbfbf;*/
     -fx-background-color: #86b4c4;
     -fx-text-fill: black;
-    -fx-border-color:#1e96c0;
+    -fx-border-color:#004168;
 }
 
 /*
@@ -112,7 +112,7 @@
     -fx-border-width: 2;
     -fx-border-radius: 4;
     /*-fx-background-color: linear-gradient(#550000, #801515);*/
-    -fx-background-color: #a82f2f;
+    -fx-background-color: #004168;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 24pt;
     -fx-text-fill: white;
@@ -123,9 +123,19 @@
     -fx-border-width: 2;
     -fx-border-radius: 4;
     /*-fx-background-radius: 4;*/
-    -fx-background-color: #a82f2f;
+    -fx-background-color: #004168;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 12pt;
+    -fx-text-fill: white;
+}
+
+.selection {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-radius: 2;
+    -fx-background-color: #004168;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
     -fx-text-fill: white;
 }
 
@@ -149,6 +159,7 @@
     -fx-border-radius: 4;
     -fx-background-radius: 4;
 }
+
 
 /*
 

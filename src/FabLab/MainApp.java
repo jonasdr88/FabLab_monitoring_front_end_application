@@ -5,6 +5,7 @@ import FabLab.Model.Machine;
 import FabLab.Model.User;
 import FabLab.Reader.JavaReader;
 import FabLab.View.IdleScreenController;
+import FabLab.View.NewSessionOrStopController;
 import FabLab.View.RegisterUserController;
 import FabLab.View.SelectionOverviewController;
 import javafx.animation.Animation;
@@ -37,6 +38,7 @@ public class MainApp extends Application {
     private static HashMap<String,Machine> machineHashMap;
     private static SelectionOverviewController selectionOverviewController;
     private static IdleScreenController idleScreenController;
+    private static NewSessionOrStopController newSessionOrStopController;
     public boolean registerWindowOpen = false;
     private static MainApp mainapp;
     private static boolean isIdle = true;
@@ -77,7 +79,7 @@ public class MainApp extends Application {
     }
 
     /* Show the Main screen for selection of machines and materials */
-    public void showSelectionOverview()
+    public void showSelectionOverview(String UID)
     {
         isIdle = false;
         try
@@ -89,6 +91,28 @@ public class MainApp extends Application {
             rootLayout.setCenter(selectionOverview);
             selectionOverviewController = loader.getController();
             selectionOverviewController.setMainApp(this);
+            selectionOverviewController.setMachineHashMap();
+            selectionOverviewController.setUserIDLabel(UID);
+            selectionOverviewController.getUserInfo(UID);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void showNewSessionOrStopScreen()
+    {
+        isIdle = false;
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("View/NewSessionOrStop.fxml"));
+            AnchorPane newSessionOrStop = loader.load();
+            rootLayout.setCenter(newSessionOrStop);
+            newSessionOrStopController = loader.getController();
+            newSessionOrStopController.setMainApp(this);
         }
         catch (IOException e)
         {
@@ -141,6 +165,7 @@ public class MainApp extends Application {
             AnchorPane IdleScreen = (AnchorPane) loader.load();
             rootLayout.setCenter(IdleScreen);
             idleScreenController = loader.getController();
+            idleScreenController.checkInUse();
         }
         catch (IOException e)
         {
@@ -190,10 +215,10 @@ public class MainApp extends Application {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                mainapp.showSelectionOverview();
-                                selectionOverviewController.setUserIDLabel(UID);
-                                selectionOverviewController.getUserInfo(UID);
-                                //TODO communicatie met backend en naam displayen
+                                checkData();
+                                mainapp.showNewSessionOrStopScreen();
+                                newSessionOrStopController.setCurrentUser(Backend.getUser(UID), UID);
+                                newSessionOrStopController.setMachineLabels();
                             }
                         });
                     }
@@ -211,7 +236,11 @@ public class MainApp extends Application {
     public static void heartBeat()
     {
         if(isIdle)
-            checkData();
+        {
+            System.out.println("heart beat");
+            mainapp.showIdleScreen();
+        }
+
     }
 
     public static void checkData()

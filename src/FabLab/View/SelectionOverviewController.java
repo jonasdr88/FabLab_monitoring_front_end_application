@@ -80,6 +80,7 @@ public class SelectionOverviewController {
     private List<Label> unitLabels;
     private int materialamount;
     private User currentUser;
+    private HashMap<String, Machine> machineHashMap;
 
     //constructor is called BEFORE the initialize method
     public SelectionOverviewController()
@@ -179,9 +180,14 @@ public class SelectionOverviewController {
         machineBox.setItems(mainApp.getMachineStringList());
     }
 
-    public void machineSelectHandle()
+    public void setMachineHashMap()
     {
-        selectedMachine = mainapp.getMachineHashMap().get(machineBox.getValue());
+        machineHashMap = mainapp.getMachineHashMap();
+    }
+
+    public void machineSelectHandle() //TODO ERROR wanneer een 2e keer gescanned wordt?
+    {
+        selectedMachine = machineHashMap.get(machineBox.getValue());
         selectedMachineLabel.setText(machineBox.getValue());
         materialBox.setItems(selectedMachine.getMaterialStringList());
 
@@ -189,8 +195,11 @@ public class SelectionOverviewController {
         for(int i=0; i<5; i++)
         {
             materialLabels.get(i).setVisible(false);
+            materialLabels.get(i).setText("");
             materialQuantityTFS.get(i).setVisible(false);
+            materialQuantityTFS.get(i).setText("");
             unitLabels.get(i).setVisible(false);
+            unitLabels.get(i).setText("");
         }
     }
 

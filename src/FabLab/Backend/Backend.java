@@ -70,6 +70,7 @@ public class Backend
                 }
                 Machine machine = new Machine(((Long)jsonMachine.get("id")).intValue(), (String)jsonMachine.get("name"), materials);
                 if((boolean)jsonMachine.get("in_use")) {
+                    machine.setInUse(true);
                     machine.setInUseBy((String) jsonMachine.get("in_use_by"));
                 }
                 machines.add(machine);

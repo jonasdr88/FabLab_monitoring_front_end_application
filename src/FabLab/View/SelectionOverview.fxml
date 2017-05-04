@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -13,11 +14,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="800.0" styleClass="background" stylesheets="@FabLabApp_DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FabLab.View.SelectionOverviewController">
    <children>
-      <SplitPane dividerPositions="0.47" prefHeight="400.0" prefWidth="600.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.475" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@FabLabApp_DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane maxWidth="376.0" minHeight="0.0" minWidth="376.0" prefHeight="479.0" prefWidth="376.0" styleClass="background">
                <children>
-                  <GridPane layoutY="25.0" prefHeight="304.0" prefWidth="300.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="25.0">
+                  <GridPane layoutY="117.0" prefHeight="311.0" prefWidth="292.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="117.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="108.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="192.0" />
@@ -54,6 +55,11 @@
                         <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                      </opaqueInsets>
                   </GridPane>
+                  <ImageView fitHeight="130.0" fitWidth="281.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <image>
+                        <Image url="@Data/ua.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="479.0" prefWidth="452.0" styleClass="background" stylesheets="@FabLabApp_DarkTheme.css">
@@ -79,9 +85,9 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox prefHeight="81.0" prefWidth="408.0">
+                        <HBox prefHeight="61.0" prefWidth="416.0">
                            <children>
-                              <Label prefHeight="50.0" prefWidth="85.0" text="machine:">
+                              <Label prefHeight="50.0" prefWidth="85.0" text="Machine:">
                                  <HBox.margin>
                                     <Insets left="20.0" />
                                  </HBox.margin>
@@ -96,82 +102,82 @@
                               </Label>
                            </children>
                         </HBox>
-                        <GridPane prefHeight="186.0" prefWidth="388.0">
+                        <GridPane prefHeight="214.0" prefWidth="376.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="204.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="114.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="71.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="37.0" minHeight="7.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="37.0" minHeight="1.0" prefHeight="37.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label prefHeight="50.0" prefWidth="85.0" text="materialen:" />
-                              <Label fx:id="selectedMaterialLabel1" prefHeight="50.0" prefWidth="255.0" styleClass="label-right" GridPane.rowIndex="1">
+                              <Label prefHeight="50.0" prefWidth="85.0" text="Materialen" />
+                              <Label fx:id="selectedMaterialLabel1" prefHeight="33.0" prefWidth="255.0" styleClass="label-right" GridPane.rowIndex="1">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="selectedMaterialLabel2" prefHeight="50.0" prefWidth="255.0" styleClass="label-right" GridPane.rowIndex="2">
+                              <Label fx:id="selectedMaterialLabel2" prefHeight="33.0" prefWidth="255.0" styleClass="label-right" GridPane.rowIndex="2">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="selectedMaterialLabel3" prefHeight="50.0" prefWidth="255.0" styleClass="label-right" GridPane.rowIndex="3">
+                              <Label fx:id="selectedMaterialLabel3" prefHeight="33.0" prefWidth="255.0" styleClass="label-right" GridPane.rowIndex="3">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="selectedMaterialLabel4" prefHeight="50.0" prefWidth="255.0" styleClass="label-right" GridPane.rowIndex="4">
+                              <Label fx:id="selectedMaterialLabel4" prefHeight="33.0" prefWidth="255.0" styleClass="label-right" GridPane.rowIndex="4">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="selectedMaterialLabel5" prefHeight="50.0" prefWidth="255.0" styleClass="label-right" GridPane.rowIndex="5">
+                              <Label fx:id="selectedMaterialLabel5" prefHeight="33.0" prefWidth="255.0" styleClass="label-right" GridPane.rowIndex="5">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>
                               </Label>
-                              <Label prefHeight="30.0" prefWidth="105.0" text="hoeveelheid:" GridPane.columnIndex="1">
+                              <Label prefHeight="30.0" prefWidth="105.0" text="Hoeveelheid" GridPane.columnIndex="1">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding></Label>
-                              <TextField fx:id="materialQuantityTF1" minHeight="31.0" minWidth="20.0" prefColumnCount="0" prefHeight="31.0" prefWidth="107.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField fx:id="materialQuantityTF2" minHeight="0.0" minWidth="0.0" prefHeight="31.0" prefWidth="107.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField fx:id="materialQuantityTF3" minHeight="0.0" minWidth="0.0" prefHeight="31.0" prefWidth="107.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField fx:id="materialQuantityTF4" minHeight="0.0" minWidth="0.0" prefHeight="32.0" prefWidth="107.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <TextField fx:id="materialQuantityTF5" minHeight="0.0" minWidth="0.0" prefWidth="0.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Label prefHeight="30.0" prefWidth="105.0" text="eenheid:" GridPane.columnIndex="2">
+                              <TextField fx:id="materialQuantityTF1" minHeight="31.0" minWidth="20.0" prefColumnCount="0" prefHeight="33.0" prefWidth="107.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="materialQuantityTF2" minHeight="0.0" minWidth="0.0" prefHeight="33.0" prefWidth="107.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="materialQuantityTF3" minHeight="0.0" minWidth="0.0" prefHeight="33.0" prefWidth="107.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="materialQuantityTF4" minHeight="0.0" minWidth="0.0" prefHeight="33.0" prefWidth="107.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="materialQuantityTF5" minHeight="0.0" minWidth="0.0" prefHeight="33.0" prefWidth="0.0" styleClass="text-field-materiaal" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label prefHeight="30.0" prefWidth="105.0" text="Eenheid" GridPane.columnIndex="2">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="unitLabel1" prefHeight="50.0" prefWidth="255.0" styleClass="label-right" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                              <Label fx:id="unitLabel1" prefHeight="33.0" prefWidth="255.0" styleClass="label-right" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="unitLabel2" prefHeight="50.0" prefWidth="255.0" styleClass="label-right" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                              <Label fx:id="unitLabel2" prefHeight="33.0" prefWidth="255.0" styleClass="label-right" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="unitLabel3" prefHeight="50.0" prefWidth="255.0" styleClass="label-right" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                              <Label fx:id="unitLabel3" prefHeight="33.0" prefWidth="255.0" styleClass="label-right" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="unitLabel4" prefHeight="50.0" prefWidth="255.0" styleClass="label-right" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                              <Label fx:id="unitLabel4" prefHeight="33.0" prefWidth="255.0" styleClass="label-right" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="unitLabel5" prefHeight="50.0" prefWidth="255.0" styleClass="label-right" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                              <Label fx:id="unitLabel5" prefHeight="33.0" prefWidth="255.0" styleClass="label-right" GridPane.columnIndex="2" GridPane.rowIndex="5">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>

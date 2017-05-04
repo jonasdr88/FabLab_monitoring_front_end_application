@@ -70,6 +70,11 @@ public class Machine {
         this.user = name;
     }
 
+    public boolean getInUse()
+    {
+        return this.inUse;
+    }
+
     public String getInUseBy() {
         return this.user;
     }

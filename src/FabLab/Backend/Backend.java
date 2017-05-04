@@ -22,7 +22,6 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,14 +34,17 @@ public class Backend
 
         //getMachines();
         for(int i = 0; i < 200;i++){
-        User user = getUser("EE254893");
-        ArrayList<Machine> machines = getMachines();
+        /*ArrayList<Machine> machines = getMachines();
         Machine machine = machines.get(3);
         HashMap<Material, Double> materials = new HashMap<>();
         machine.getMaterialList().forEach(m -> materials.put(m, 25.5));
         checkIn(user, machine, materials);
-        System.out.println("Checkout: "+checkOut(machine));
+        System.out.println("Checkout: "+checkOut(machine));*/
         }
+        User user = getUser("08F47175");
+        for(Machine machine: user.getMachinesInUse())
+            System.out.println(machine.getName());
+        //checkIn(user, getMachines().get(0), new HashMap<>());
     }
 
 
@@ -164,7 +166,8 @@ public class Backend
             JSONObject jsonObject = (JSONObject) parser.parse(json);
             if(jsonObject.get("result") != null && ((String) jsonObject.get("result")).equals("success")) {
                 JSONObject userJson = (JSONObject) jsonObject.get("user");
-                User user = new User(((Long)userJson.get("id")).intValue(), (String) userJson.get("first_name"),(String)  userJson.get("last_name"),(String)  userJson.get("ua_id"),(String)  userJson.get("email"),(String)  userJson.get("department"),(String)  userJson.get("nfc_uuid"));
+                ArrayList<Machine> machinesInUse = machinesFromJson((JSONArray) userJson.get("machines"));
+                User user = new User(((Long)userJson.get("id")).intValue(), (String) userJson.get("first_name"),(String)  userJson.get("last_name"),(String)  userJson.get("ua_id"),(String)  userJson.get("email"),(String)  userJson.get("department"),(String)  userJson.get("nfc_uuid"), machinesInUse);
                 return user;
             } else {
                 //TODO: maybe usernotfoundexception?
@@ -211,7 +214,7 @@ public class Backend
             JSONObject jsonObject = (JSONObject) parser.parse(json);
             if(jsonObject.get("result") != null && ((String) jsonObject.get("result")).equals("success")) {
                 JSONObject userJson = (JSONObject) jsonObject.get("user");
-                User user = new User(((Long)userJson.get("id")).intValue(), (String) userJson.get("first_name"),(String)  userJson.get("last_name"),(String)  userJson.get("ua_id"),(String)  userJson.get("email"),(String)  userJson.get("department"),(String)  userJson.get("nfc_uuid"));
+                User user = new User(((Long)userJson.get("id")).intValue(), (String) userJson.get("first_name"),(String)  userJson.get("last_name"),(String)  userJson.get("ua_id"),(String)  userJson.get("email"),(String)  userJson.get("department"),(String)  userJson.get("nfc_uuid"), machinesFromJson((JSONArray) userJson.get("machines")));
                 return user;
             } else {
                 System.out.println(json);
@@ -235,6 +238,25 @@ public class Backend
 
         return null;
 
+    }
+
+    public static ArrayList<Machine> machinesFromJson(JSONArray jsonArray) {
+        ArrayList<Machine> machines = new ArrayList<>();
+        for(Object obj: jsonArray) {
+            JSONObject jsonMachine = (JSONObject) obj;
+            System.out.println(jsonMachine);
+            ArrayList<Material> materials = new ArrayList<>();
+            for(Object materialObj: (JSONArray)jsonMachine.get("materials")) {
+                JSONObject jsonMaterial = (JSONObject) materialObj;
+                materials.add(new Material(((Long) jsonMaterial.get("id")).intValue(), (String) jsonMaterial.get("name")));
+            }
+            Machine machine = new Machine(((Long)jsonMachine.get("id")).intValue(), (String)jsonMachine.get("name"), materials);
+            if((boolean)jsonMachine.get("in_use")) {
+                machine.setInUseBy((String) jsonMachine.get("in_use_by"));
+            }
+            machines.add(machine);
+        }
+        return machines;
     }
 
 

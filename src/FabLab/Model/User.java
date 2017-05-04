@@ -3,6 +3,8 @@ package FabLab.Model;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.*;
 
+import java.util.ArrayList;
+
 /**
  * Created by jonas on 11/04/2017.
  */
@@ -16,12 +18,16 @@ public class User {
     private final StringProperty study;
     private final StringProperty nfc_id;
 
+
+
+    private ArrayList<Machine> machinesInUse;
+
     public User()
     {
-        this(-1,null, null, null, null, null, null);
+        this(-1,null, null, null, null, null, null, null);
     }
 
-    public User(int id, String firstName, String lastName, String rolNumber, String email, String opleiding, String nfc_id)
+    public User(int id, String firstName, String lastName, String rolNumber, String email, String opleiding, String nfc_id, ArrayList<Machine> machinesInUse)
     {
         this.id = id;
         this.firstName = new SimpleStringProperty(firstName);
@@ -30,6 +36,7 @@ public class User {
         this.emailAdress = new SimpleStringProperty(email);
         this.study = new SimpleStringProperty(opleiding);
         this.nfc_id = new SimpleStringProperty(nfc_id);
+        this.machinesInUse = machinesInUse;
     }
 
     public String getFirstName()
@@ -93,6 +100,10 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public ArrayList<Machine> getMachinesInUse() {
+        return machinesInUse;
     }
 
 }

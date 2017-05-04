@@ -116,7 +116,7 @@ public class MainApp extends Application {
 
             RegisterUserController controller = loader.getController();
             controller.setRegisterUserStage(registerUserStage);
-            controller.setUser(new User(-1, "", "", "", "", "", UID));
+            controller.setUser(new User(-1, "", "", "", "", "", UID, null));
             controller.setSelectionOverviewController(selectionOverviewController);
 
             registerWindowOpen = true;

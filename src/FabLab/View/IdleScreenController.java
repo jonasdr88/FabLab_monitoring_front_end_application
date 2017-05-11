@@ -87,16 +87,14 @@ public class IdleScreenController {
 
     public void checkInUse()
     {
-        System.out.println(" - checkinuse START");
         int j = 0;
         for(int i=0; i<machineList.size(); i++)
         {
-            System.out.println("check in use eerste loop ");
             if(machineList.get(i).getInUse())
             {
                 machineLabels.get(j).setText(machineList.get(i).getName());
-                userLabels.get(j).setText(machineList.get(j).getInUseBy());
-                System.out.println(machineList.get(i).getName() + "     --    " + machineList.get(j).getInUseBy());
+                userLabels.get(j).setText(machineList.get(i).getInUseBy());
+                System.out.println(machineList.get(i).getName() + "     --    " + machineList.get(i).getInUseBy());
                 j++;
                 if(j>7)
                     return;

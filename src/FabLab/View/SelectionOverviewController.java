@@ -187,19 +187,21 @@ public class SelectionOverviewController {
 
     public void machineSelectHandle() //TODO ERROR wanneer een 2e keer gescanned wordt?
     {
-        selectedMachine = machineHashMap.get(machineBox.getValue());
-        selectedMachineLabel.setText(machineBox.getValue());
-        materialBox.setItems(selectedMachine.getMaterialStringList());
-
-        materialamount = 0;
-        for(int i=0; i<5; i++)
+        if (selectedMachine != null)
         {
-            materialLabels.get(i).setVisible(false);
-            materialLabels.get(i).setText("");
-            materialQuantityTFS.get(i).setVisible(false);
-            materialQuantityTFS.get(i).setText("");
-            unitLabels.get(i).setVisible(false);
-            unitLabels.get(i).setText("");
+            selectedMachine = machineHashMap.get(machineBox.getValue());
+            selectedMachineLabel.setText(machineBox.getValue());
+            materialBox.setItems(selectedMachine.getMaterialStringList());
+
+            materialamount = 0;
+            for (int i = 0; i < 5; i++) {
+                materialLabels.get(i).setVisible(false);
+                materialLabels.get(i).setText("");
+                materialQuantityTFS.get(i).setVisible(false);
+                materialQuantityTFS.get(i).setText("");
+                unitLabels.get(i).setVisible(false);
+                unitLabels.get(i).setText("");
+            }
         }
     }
 

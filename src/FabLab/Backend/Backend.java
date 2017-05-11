@@ -57,24 +57,8 @@ public class Backend
             CloseableHttpResponse response1 = httpclient.execute(httpGet);
             String json = IOUtils.toString(response1.getEntity().getContent(), "UTF-8");
             JSONParser parser = new JSONParser();
-            System.out.println(json);
             JSONArray jsonObject = (JSONArray) parser.parse(json);
-            ArrayList<Machine> machines = new ArrayList<>();
-            for(Object obj: jsonObject) {
-                JSONObject jsonMachine = (JSONObject) obj;
-                System.out.println(jsonMachine);
-                ArrayList<Material> materials = new ArrayList<>();
-                for(Object materialObj: (JSONArray)jsonMachine.get("materials")) {
-                    JSONObject jsonMaterial = (JSONObject) materialObj;
-                    materials.add(new Material(((Long) jsonMaterial.get("id")).intValue(), (String) jsonMaterial.get("name"), (String) jsonMaterial.get("unit")));
-                }
-                Machine machine = new Machine(((Long)jsonMachine.get("id")).intValue(), (String)jsonMachine.get("name"), materials);
-                if((boolean)jsonMachine.get("in_use")) {
-                    machine.setInUse(true);
-                    machine.setInUseBy((String) jsonMachine.get("in_use_by"));
-                }
-                machines.add(machine);
-            }
+            ArrayList<Machine> machines = machinesFromJson(jsonObject);
             httpclient.close();
             return machines;
         } catch (IOException e) {
@@ -88,7 +72,6 @@ public class Backend
     public static boolean checkOut(Machine machine) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet("http://fablab.klievan.be/api/machines/checkout/"+machine.getId());
-        System.out.println("http://fablab.klievan.be/api/machines/checkout/"+machine.getId());
         try {
             CloseableHttpResponse response1 = httpclient.execute(httpGet);
             String json = IOUtils.toString(response1.getEntity().getContent(), "UTF-8");
@@ -245,7 +228,6 @@ public class Backend
         ArrayList<Machine> machines = new ArrayList<>();
         for(Object obj: jsonArray) {
             JSONObject jsonMachine = (JSONObject) obj;
-            System.out.println(jsonMachine);
             ArrayList<Material> materials = new ArrayList<>();
             for(Object materialObj: (JSONArray)jsonMachine.get("materials")) {
                 JSONObject jsonMaterial = (JSONObject) materialObj;
@@ -253,8 +235,10 @@ public class Backend
             }
             Machine machine = new Machine(((Long)jsonMachine.get("id")).intValue(), (String)jsonMachine.get("name"), materials);
             if((boolean)jsonMachine.get("in_use")) {
+                machine.setInUse(true);
                 machine.setInUseBy((String) jsonMachine.get("in_use_by"));
             }
+            System.out.println("Machine "+machine.hashCode()+" "+machine.getName()+" is in use by "+machine.getInUseBy());
             machines.add(machine);
         }
         return machines;

@@ -67,6 +67,7 @@ public class Machine {
     }
 
     public void setInUseBy(String name) {
+        System.out.println("Setting in use by to "+name);
         this.user = name;
     }
 

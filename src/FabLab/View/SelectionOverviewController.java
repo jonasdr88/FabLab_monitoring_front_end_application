@@ -187,10 +187,10 @@ public class SelectionOverviewController {
 
     public void machineSelectHandle() //TODO ERROR wanneer een 2e keer gescanned wordt?
     {
-        if (selectedMachine != null)
-        {
+
             selectedMachine = machineHashMap.get(machineBox.getValue());
             selectedMachineLabel.setText(machineBox.getValue());
+        if(selectedMachine != null)
             materialBox.setItems(selectedMachine.getMaterialStringList());
 
             materialamount = 0;
@@ -202,7 +202,7 @@ public class SelectionOverviewController {
                 unitLabels.get(i).setVisible(false);
                 unitLabels.get(i).setText("");
             }
-        }
+
     }
 
     public void materialSelectHandle()

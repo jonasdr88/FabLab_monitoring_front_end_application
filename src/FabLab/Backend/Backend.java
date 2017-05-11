@@ -136,6 +136,7 @@ public class Backend
     }
 
     public static User getUser(String nfc_uuid) {
+        System.out.println();
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost("http://fablab.klievan.be/api/users/nfclookup");
         List<NameValuePair> nvps = new ArrayList <NameValuePair>();

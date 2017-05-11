@@ -1,6 +1,7 @@
 package FabLab.View;
 
 import FabLab.Backend.Backend;
+import FabLab.MainApp;
 import FabLab.Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +41,7 @@ public class RegisterUserController {
     private boolean isStudyDifferent = false;
     private SelectionOverviewController selectionOverviewController;
     private static ObservableList<String> studyStringList;
+    private MainApp mainapp;
 
     public RegisterUserController()
     {
@@ -54,6 +56,11 @@ public class RegisterUserController {
         studyStringList = FXCollections.observableArrayList();
         studyStringList.addAll("FTI-Elektronica-ICT", "FTI-Elektromechanica", "FTI-Bouwkunde", "FTI-Chemie", "Andere");
         studyComboBox.setItems(studyStringList);
+    }
+
+    public void setMainapp(MainApp mainapp)
+    {
+        this.mainapp = mainapp;
     }
 
     /*set the stage of the dialog window*/
@@ -131,6 +138,7 @@ public class RegisterUserController {
     private void handleCancel()
     {
         registerUserStage.close();
+        mainapp.showIdleScreen();
     }
 
     private boolean isInputValid()

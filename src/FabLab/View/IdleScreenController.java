@@ -54,7 +54,9 @@ public class IdleScreenController {
     private List<Machine> machineList;
 
     public IdleScreenController()
-    {}
+    {
+
+    }
 
     public void initialize()
     {

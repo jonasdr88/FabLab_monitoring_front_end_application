@@ -118,6 +118,7 @@ public class SelectionOverviewController {
         {
             materialLabels.get(i).setVisible(false);
             materialQuantityTFS.get(i).setVisible(false);
+            materialQuantityTFS.get(i).getProperties().put("vkType", "numeric");
             unitLabels.get(i).setVisible(false);
         }
     }
@@ -188,10 +189,18 @@ public class SelectionOverviewController {
     public void machineSelectHandle() //TODO ERROR wanneer een 2e keer gescanned wordt?
     {
 
-            selectedMachine = machineHashMap.get(machineBox.getValue());
-            selectedMachineLabel.setText(machineBox.getValue());
+        selectedMachine = machineHashMap.get(machineBox.getValue());
+        selectedMachineLabel.setText(machineBox.getValue());
         if(selectedMachine != null)
-            materialBox.setItems(selectedMachine.getMaterialStringList());
+        {
+            if(selectedMachine.getInUse())
+            {
+                mainapp.showStopOtherPersonsSessionScreen();
+            }
+            else
+                materialBox.setItems(selectedMachine.getMaterialStringList());
+
+        }
 
             materialamount = 0;
             for (int i = 0; i < 5; i++) {
@@ -289,4 +298,8 @@ public class SelectionOverviewController {
         this.currentUser = user;
     }
 
+    public Machine getSelectedMachine()
+    {
+        return this.selectedMachine;
+    }
 }

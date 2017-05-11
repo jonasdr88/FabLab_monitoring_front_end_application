@@ -4,10 +4,7 @@ import FabLab.Backend.Backend;
 import FabLab.Model.Machine;
 import FabLab.Model.User;
 import FabLab.Reader.JavaReader;
-import FabLab.View.IdleScreenController;
-import FabLab.View.NewSessionOrStopController;
-import FabLab.View.RegisterUserController;
-import FabLab.View.SelectionOverviewController;
+import FabLab.View.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -39,9 +36,12 @@ public class MainApp extends Application {
     private static SelectionOverviewController selectionOverviewController;
     private static IdleScreenController idleScreenController;
     private static NewSessionOrStopController newSessionOrStopController;
+    private static StopOtherPersonsSessionController stopOtherPersonsSessionController;
+    private static AreYouSureScreenController areYouSureScreenController;
     public boolean registerWindowOpen = false;
     private static MainApp mainapp;
     private static boolean isIdle = true;
+    private static String currentUID;
 
     public MainApp()
     {
@@ -142,6 +142,7 @@ public class MainApp extends Application {
             controller.setRegisterUserStage(registerUserStage);
             controller.setUser(new User(-1, "", "", "", "", "", UID, null));
             controller.setSelectionOverviewController(selectionOverviewController);
+            controller.setMainapp(this);
 
             registerWindowOpen = true;
             registerUserStage.showAndWait();
@@ -152,6 +153,71 @@ public class MainApp extends Application {
         {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public void showStopOtherPersonsSessionScreen()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("View/StopOtherPersonsSession.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage stopSessionStage = new Stage();
+            stopSessionStage.setTitle("Stop een sessie");
+            stopSessionStage.initModality(Modality.WINDOW_MODAL);
+            stopSessionStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            stopSessionStage.setScene(scene);
+
+            stopOtherPersonsSessionController = loader.getController();
+            stopOtherPersonsSessionController.setStopSessionStage(stopSessionStage);
+            stopOtherPersonsSessionController.setMainapp(this);
+            stopOtherPersonsSessionController.setSelectedMachine(selectionOverviewController.getSelectedMachine());
+
+            stopSessionStage.showAndWait();
+
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void showAreYouSureScreen()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("View/AreYouSureScreen.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage areYouSureStage = new Stage();
+            areYouSureStage.setTitle("Bent u zeker?");
+            areYouSureStage.initModality(Modality.WINDOW_MODAL);
+            areYouSureStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            areYouSureStage.setScene(scene);
+
+            areYouSureScreenController = loader.getController();
+            areYouSureScreenController.setAreYouSureStage(areYouSureStage);
+            areYouSureScreenController.setMainapp(this);
+
+            areYouSureStage.showAndWait();
+
+            if(areYouSureScreenController.getStopSession())
+            {
+                Backend.checkOut(selectionOverviewController.getSelectedMachine());
+                checkData();
+            }
+
+
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -194,6 +260,11 @@ public class MainApp extends Application {
         return this.machineHashMap;
     }
 
+    public SelectionOverviewController getSelectionOverviewController()
+    {
+        return this.selectionOverviewController;
+    }
+
     public static void main(String[] args)
     {
         machineHashMap = new HashMap<>();
@@ -212,6 +283,7 @@ public class MainApp extends Application {
                 public void run() {
                     while (true) {
                         String UID = RFIDreader.readUID();
+                        currentUID = UID;
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {

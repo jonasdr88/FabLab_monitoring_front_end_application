@@ -301,6 +301,11 @@ public class SelectionOverviewController {
         this.currentUser = user;
     }
 
+    public User getCurrentUser()
+    {
+        return this.currentUser;
+    }
+
     public Machine getSelectedMachine()
     {
         return this.selectedMachine;

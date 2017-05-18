@@ -209,7 +209,7 @@ public class MainApp extends Application {
 
             if(areYouSureScreenController.getStopSession())
             {
-                Backend.checkOut(selectionOverviewController.getSelectedMachine());
+                Backend.checkOut(selectionOverviewController.getSelectedMachine(), selectionOverviewController.getCurrentUser());
                 checkData();
             }
 

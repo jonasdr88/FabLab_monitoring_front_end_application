@@ -7,7 +7,6 @@ import FabLab.Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,27 +113,27 @@ public class NewSessionOrStopController {
 
     public void handleStop1()
     {
-        Backend.checkOut(machineList.get(0));
+        Backend.checkOut(machineList.get(0),currentUser);
     }
     public void handleStop2()
     {
-        Backend.checkOut(machineList.get(1));
+        Backend.checkOut(machineList.get(1),currentUser);
     }
     public void handleStop3()
     {
-        Backend.checkOut(machineList.get(2));
+        Backend.checkOut(machineList.get(2),currentUser);
     }
     public void handleStop4()
     {
-        Backend.checkOut(machineList.get(3));
+        Backend.checkOut(machineList.get(3),currentUser);
     }
     public void handleStop5()
     {
-        Backend.checkOut(machineList.get(4));
+        Backend.checkOut(machineList.get(4),currentUser);
     }
     public void handleStop6()
     {
-        Backend.checkOut(machineList.get(5));
+        Backend.checkOut(machineList.get(5),currentUser);
     }
 
 }

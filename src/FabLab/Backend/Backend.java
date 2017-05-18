@@ -22,6 +22,7 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,8 +43,10 @@ public class Backend
         System.out.println("Checkout: "+checkOut(machine));*/
         }
         User user = getUser("08F47175");
-        for(Machine machine: user.getMachinesInUse())
-            System.out.println(machine.getName());
+        List<Machine> machines = getMachines();
+        checkIn(user, machines.get(0),new HashMap<>());
+        user = getUser("EE254893");
+        checkOut(machines.get(0), user);
         //checkIn(user, getMachines().get(0), new HashMap<>());
     }
 
@@ -69,27 +72,7 @@ public class Backend
         return null;
     }
 
-    public static boolean checkOut(Machine machine) {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("http://fablab.klievan.be/api/machines/checkout/"+machine.getId());
-        try {
-            CloseableHttpResponse response1 = httpclient.execute(httpGet);
-            String json = IOUtils.toString(response1.getEntity().getContent(), "UTF-8");
-            JSONParser parser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) parser.parse(json);
-            httpclient.close();
-            System.out.println(jsonObject.get("result"));
-            if(((String)jsonObject.get("result")).equalsIgnoreCase("success")) {
-                return true;
-            }
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+
 
     public static boolean checkIn(User user, Machine machine, Map<Material, Double> materials) {
         JSONObject messageObject = new JSONObject();
@@ -111,7 +94,6 @@ public class Backend
             CloseableHttpResponse response2 = httpclient.execute(httpPost);
             String json = IOUtils.toString(response2.getEntity().getContent(), "UTF-8");
             JSONParser parser = new JSONParser();
-            System.out.println(json+" test");
             JSONObject jsonObject = (JSONObject) parser.parse(json);
             System.out.println(jsonObject);
             httpclient.close();
@@ -132,6 +114,33 @@ public class Backend
         }
 
 
+        return false;
+    }
+
+    public static boolean checkOut(Machine machine, User user) {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost("http://fablab.klievan.be/api/machines/checkout/"+machine.getId());
+        List<NameValuePair> nvps = new ArrayList <NameValuePair>();
+        httpPost.addHeader("Accept", "application/json");
+        nvps.add(new BasicNameValuePair("user_id", user.getId()+"")); //ID of the user that is executing the checkout
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+            CloseableHttpResponse response1 = httpclient.execute(httpPost);
+            String json = IOUtils.toString(response1.getEntity().getContent(), "UTF-8");
+            JSONParser parser = new JSONParser();
+            System.out.println(json);
+            JSONObject jsonObject = (JSONObject) parser.parse(json);
+            httpclient.close();
+            System.out.println(jsonObject.get("result"));
+            if(((String)jsonObject.get("result")).equalsIgnoreCase("success")) {
+                return true;
+            }
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
@@ -188,7 +197,6 @@ public class Backend
         nvps.add(new BasicNameValuePair("last_name", lastName));
         nvps.add(new BasicNameValuePair("department", department));
         nvps.add(new BasicNameValuePair("email", email));
-        System.out.println("Department: "+department);
         nvps.add(new BasicNameValuePair("ua_id", ua_id));
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nvps));

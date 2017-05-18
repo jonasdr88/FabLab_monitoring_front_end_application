@@ -195,7 +195,10 @@ public class SelectionOverviewController {
         {
             if(selectedMachine.getInUse())
             {
+                System.out.println("ERROR BEFORE");
                 mainapp.showStopOtherPersonsSessionScreen();
+                System.out.println("ERROR");
+                return;
             }
             else
                 materialBox.setItems(selectedMachine.getMaterialStringList());

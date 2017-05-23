@@ -46,14 +46,14 @@
 }
 
 .label-idleScreen {
-    -fx-font-size: 48pt;
+    -fx-font-size: 36pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: black;
     -fx-opacity: 1;
 }
 
 .label-idleScreenText {
-    -fx-font-size: 14pt;
+    -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: black;
 }

@@ -17,14 +17,14 @@
             <Image url="@Data/ua.png" />
          </image>
       </ImageView>
-      <Label layoutX="41.0" layoutY="167.0" prefHeight="93.0" prefWidth="718.0" styleClass="label-idleScreen" text="FabLab Monitoring System" textAlignment="CENTER">
+      <Label layoutX="41.0" layoutY="167.0" prefHeight="93.0" prefWidth="743.0" styleClass="label-idleScreen" text="FabLab Monitoring System" textAlignment="CENTER">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Label layoutX="29.0" layoutY="248.0" prefHeight="39.0" prefWidth="743.0" styleClass="label-idleScreenText" text="Gelieve uw universiteitskaart te scannen en uw keuze te maken alvorens machines te hanteren.">
+      <Label layoutX="29.0" layoutY="248.0" prefHeight="25.0" prefWidth="766.0" styleClass="label-idleScreenText" text="Gelieve uw universiteitskaart te scannen en uw keuze te maken alvorens machines te hanteren.">
          <font>
-            <Font size="15.0" />
+            <Font size="11.0" />
          </font>
       </Label>
       <Pane layoutX="237.0" layoutY="281.0" prefHeight="198.0" prefWidth="563.0">

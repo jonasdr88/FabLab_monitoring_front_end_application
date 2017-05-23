@@ -36,15 +36,15 @@
             <Label fx:id="machineLabel4" prefWidth="300.0" text="Label" GridPane.rowIndex="3" />
             <Label fx:id="machineLabel5" prefWidth="300.0" text="Label" GridPane.rowIndex="4" />
             <Label fx:id="machineLabel6" prefHeight="129.0" prefWidth="300.0" text="Label" GridPane.rowIndex="5" />
-            <Button fx:id="stopButton1" mnemonicParsing="false" onAction="#handleStop1" prefHeight="30.0" prefWidth="115.0" styleClass="selection" text="sessie stoppen" GridPane.columnIndex="1" />
-            <Button fx:id="stopButton2" mnemonicParsing="false" onAction="#handleStop2" prefHeight="0.0" prefWidth="115.0" styleClass="selection" text="Sessie stoppen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="stopButton3" mnemonicParsing="false" onAction="#handleStop3" prefHeight="0.0" prefWidth="115.0" styleClass="selection" text="Sessie stoppen" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="stopButton4" mnemonicParsing="false" onAction="#handleStop4" prefHeight="0.0" prefWidth="115.0" styleClass="selection" text="Sessie stoppen" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="stopButton5" mnemonicParsing="false" onAction="#handleStop5" prefHeight="0.0" prefWidth="115.0" styleClass="selection" text="Sessie stoppen" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="stopButton6" mnemonicParsing="false" onAction="#handleStop6" prefHeight="0.0" prefWidth="115.0" styleClass="selection" text="Sessie stoppen" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="stopButton1" mnemonicParsing="false" onAction="#handleStop1" prefHeight="30.0" prefWidth="135.0" styleClass="selection" text="sessie stoppen" GridPane.columnIndex="1" />
+            <Button fx:id="stopButton2" mnemonicParsing="false" onAction="#handleStop2" prefHeight="30.0" prefWidth="136.0" styleClass="selection" text="Sessie stoppen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="stopButton3" mnemonicParsing="false" onAction="#handleStop3" prefHeight="30.0" prefWidth="149.0" styleClass="selection" text="Sessie stoppen" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="stopButton4" mnemonicParsing="false" onAction="#handleStop4" prefHeight="30.0" prefWidth="146.0" styleClass="selection" text="Sessie stoppen" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="stopButton5" mnemonicParsing="false" onAction="#handleStop5" prefHeight="30.0" prefWidth="150.0" styleClass="selection" text="Sessie stoppen" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="stopButton6" mnemonicParsing="false" onAction="#handleStop6" prefHeight="30.0" prefWidth="264.0" styleClass="selection" text="Sessie stoppen" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Label layoutX="131.0" layoutY="88.0" prefHeight="21.0" prefWidth="485.0" text="Wilt u een sessie stoppen, of een nieuwe met een andere machine starten?" />
+      <Label layoutX="129.0" layoutY="88.0" prefHeight="21.0" prefWidth="658.0" text="Wilt u een sessie stoppen, of een nieuwe met een andere machine starten?" />
       <Button fx:id="newSessionButton" layoutX="492.0" layoutY="157.0" maxHeight="10.0" minWidth="0.0" mnemonicParsing="false" onAction="#handleNewSession" prefHeight="0.0" prefWidth="167.0" styleClass="register" stylesheets="@FabLabApp_DarkTheme.css" text="Nieuwe sessie" />
       <Label layoutX="131.0" layoutY="136.0" prefHeight="21.0" prefWidth="178.0" text="Uw actieve sessies:" />
    </children>

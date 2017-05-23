@@ -43,10 +43,16 @@ public class MainApp extends Application {
     private static boolean isIdle = true;
     private static String currentUID;
     public static long timestamp;
+    private AnchorPane newSessionOrStop;
+    private AnchorPane selectionOverview;
+    private AnchorPane page;
 
     public MainApp()
     {
         mainapp = this;
+        System.out.println("Loading panels...");
+        loadPanels();
+        System.out.println("Finished loading panels...");
     }
 
     @Override
@@ -82,22 +88,32 @@ public class MainApp extends Application {
     /* Show the Main screen for selection of machines and materials */
     public void showSelectionOverview(String UID)
     {
-        isIdle = false;
-        try
-        {
-            // Load the selectionOverview from FXML
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("View/SelectionOverview.fxml"));
-            AnchorPane selectionOverview = (AnchorPane) loader.load();
+            isIdle = false;
             rootLayout.setCenter(selectionOverview);
-            selectionOverviewController = loader.getController();
             selectionOverviewController.setMainApp(this);
             selectionOverviewController.setMachineHashMap();
             selectionOverviewController.setUserIDLabel(UID);
             selectionOverviewController.getUserInfo(UID);
-        }
-        catch (IOException e)
-        {
+    }
+
+    public void loadPanels() {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.setLocation(MainApp.class.getResource("View/NewSessionOrStop.fxml"));
+            newSessionOrStop = loader.load();
+            newSessionOrStopController = loader.getController();
+
+            loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("View/SelectionOverview.fxml"));
+            selectionOverview = (AnchorPane) loader.load();
+            selectionOverviewController = loader.getController();
+
+            loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("View/RegisterUser.fxml"));
+            page = (AnchorPane) loader.load();
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -106,39 +122,22 @@ public class MainApp extends Application {
     public void showNewSessionOrStopScreen()
     {
         isIdle = false;
-        try
-        {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("View/NewSessionOrStop.fxml"));
-            AnchorPane newSessionOrStop = loader.load();
-            rootLayout.setCenter(newSessionOrStop);
-            newSessionOrStopController = loader.getController();
-            newSessionOrStopController.setMainApp(this);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        newSessionOrStopController.setMainApp(this);
+        rootLayout.setCenter(newSessionOrStop);
     }
 
     /* shows the dialog when the person needs to be registered */
     public boolean showRegisterUserDialog(String UID)
     {
         isIdle = false;
-        try
-        {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("View/RegisterUser.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
 
-            //create the stage
             Stage registerUserStage = new Stage();
             registerUserStage.setTitle("Registreer");
             registerUserStage.initModality(Modality.WINDOW_MODAL);
             registerUserStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
             registerUserStage.setScene(scene);
-
+            FXMLLoader loader = new FXMLLoader();
             RegisterUserController controller = loader.getController();
             controller.setRegisterUserStage(registerUserStage);
             controller.setUser(new User(-1, "", "", "", "", "", UID, null));
@@ -149,12 +148,8 @@ public class MainApp extends Application {
             registerUserStage.showAndWait();
             registerWindowOpen = false;
             return controller.isConfirmed();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
+
+
     }
 
     public void showStopOtherPersonsSessionScreen()
@@ -268,7 +263,7 @@ public class MainApp extends Application {
 
     public static void main(String[] args)
     {
-        timestamp = System.currentTimeMillis();
+
         machineHashMap = new HashMap<>();
         machineStringList = FXCollections.observableArrayList();
         checkData();

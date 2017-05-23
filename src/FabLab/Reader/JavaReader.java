@@ -43,7 +43,6 @@ public class JavaReader implements RFIDReader {
     public String readUID() {
         try {
             cardTerminal.waitForCardPresent(0);
-            System.out.println("Inserted card");
             handleCard(cardTerminal);
             cardTerminal.waitForCardAbsent(0);
         }
@@ -65,7 +64,6 @@ public class JavaReader implements RFIDReader {
                 ResponseAPDU getUIDResponse = channel.transmit(getUIDCommand);
                 byte[] getUIDResponseData = getUIDResponse.getData();
                 final String UIDdata = readable(getUIDResponseData);
-                System.out.println("getUID response data: " + UIDdata);
                 UID = UIDdata;
 
             } catch (CardException e) {

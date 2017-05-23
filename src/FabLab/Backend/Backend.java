@@ -83,7 +83,6 @@ public class Backend
             materialObject.put(set.getKey().getId(), set.getValue());
         }
         messageObject.put("materials", materialObject);
-        System.out.println(messageObject.toString());
         try {
             CloseableHttpClient httpclient = HttpClients.createDefault();
             HttpPost httpPost = new HttpPost("http://fablab.klievan.be/api/machines/checkin");
@@ -95,12 +94,10 @@ public class Backend
             String json = IOUtils.toString(response2.getEntity().getContent(), "UTF-8");
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(json);
-            System.out.println(jsonObject);
             httpclient.close();
             if(jsonObject.get("result") != null && ((String) jsonObject.get("result")).equals("success")) {
                 return true;
             } else {
-                System.out.println(json);
                 return false;
             }
         } catch (UnsupportedEncodingException e) {
@@ -128,10 +125,8 @@ public class Backend
             CloseableHttpResponse response1 = httpclient.execute(httpPost);
             String json = IOUtils.toString(response1.getEntity().getContent(), "UTF-8");
             JSONParser parser = new JSONParser();
-            System.out.println(json);
             JSONObject jsonObject = (JSONObject) parser.parse(json);
             httpclient.close();
-            System.out.println(jsonObject.get("result"));
             if(((String)jsonObject.get("result")).equalsIgnoreCase("success")) {
                 return true;
             }
@@ -145,7 +140,6 @@ public class Backend
     }
 
     public static User getUser(String nfc_uuid) {
-        System.out.println();
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost("http://fablab.klievan.be/api/users/nfclookup");
         List<NameValuePair> nvps = new ArrayList <NameValuePair>();
@@ -155,7 +149,6 @@ public class Backend
             httpPost.setEntity(new UrlEncodedFormEntity(nvps));
             CloseableHttpResponse response2 = httpclient.execute(httpPost);
             String json = IOUtils.toString(response2.getEntity().getContent(), "UTF-8");
-            System.out.println(json);
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(json);
             if(jsonObject.get("result") != null && ((String) jsonObject.get("result")).equals("success")) {
@@ -165,7 +158,6 @@ public class Backend
                 return user;
             } else {
                 //TODO: maybe usernotfoundexception?
-                System.out.println(json);
                 return null;
             }
         } catch (UnsupportedEncodingException e) {
@@ -203,14 +195,12 @@ public class Backend
             CloseableHttpResponse response2 = httpclient.execute(httpPost);
             String json = IOUtils.toString(response2.getEntity().getContent(), "UTF-8");
             JSONParser parser = new JSONParser();
-            System.out.println("JSON: " + json);
             JSONObject jsonObject = (JSONObject) parser.parse(json);
             if(jsonObject.get("result") != null && ((String) jsonObject.get("result")).equals("success")) {
                 JSONObject userJson = (JSONObject) jsonObject.get("user");
                 User user = new User(((Long)userJson.get("id")).intValue(), (String) userJson.get("first_name"),(String)  userJson.get("last_name"),(String)  userJson.get("ua_id"),(String)  userJson.get("email"),(String)  userJson.get("department"),(String)  userJson.get("nfc_uuid"), machinesFromJson((JSONArray) userJson.get("machines")));
                 return user;
             } else {
-                System.out.println(json);
                 return null;
             }
         } catch (UnsupportedEncodingException e) {
@@ -247,7 +237,6 @@ public class Backend
                 machine.setInUse(true);
                 machine.setInUseBy((String) jsonMachine.get("in_use_by"));
             }
-            System.out.println("Machine "+machine.hashCode()+" "+machine.getName()+" is in use by "+machine.getInUseBy());
             machines.add(machine);
         }
         return machines;

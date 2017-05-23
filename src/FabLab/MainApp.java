@@ -42,6 +42,7 @@ public class MainApp extends Application {
     private static MainApp mainapp;
     private static boolean isIdle = true;
     private static String currentUID;
+    public static long timestamp;
 
     public MainApp()
     {
@@ -267,6 +268,7 @@ public class MainApp extends Application {
 
     public static void main(String[] args)
     {
+        timestamp = System.currentTimeMillis();
         machineHashMap = new HashMap<>();
         machineStringList = FXCollections.observableArrayList();
         checkData();
